@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface VidaRepo extends  MongoRepository<CotizacionVida, String> {
 
     @Query("{ 'cedula' : ?0 }")
-    Optional<CotizacionVida> buscarCuentaPorCedula(String cedula);
+    Optional<CotizacionVida> buscarPorCedula(String cedula);
 
     @Query("{ 'email' : ?0 }")
-    Optional<CotizacionVida> buscarCuentaPorCorreo(String correo);
+    Optional<CotizacionVida> buscarPorCorreo(String correo);
 
     @Query("{ '_id' : ?0 }")
     Optional<CotizacionVida> findById(ObjectId id);

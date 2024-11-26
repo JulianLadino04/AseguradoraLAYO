@@ -48,6 +48,19 @@ public class SoatServicioImpl implements SoatServicio {
         System.out.println("SOAT creado y correo de confirmación enviado a: " + soat.correo());
     }
 
+    @Override
+    public void eliminarSoat(String placa) throws Exception {
+        // Verificar si el SOAT existe en la base de datos
+        if (!existePlaca(placa)) {
+            throw new Exception("No se encontró un SOAT con la placa: " + placa);
+        }
+
+        // Eliminar el SOAT de la base de datos
+        soatRepo.eliminarPorPlaca(placa);
+        System.out.println("SOAT con placa " + placa + " eliminado exitosamente.");
+    }
+
+
     // Método auxiliar para verificar si una placa ya existe
     private boolean existePlaca(String placa) {
         return soatRepo.buscarSoatPorPlaca(placa).isPresent(); // Simulación de consulta a la base de datos

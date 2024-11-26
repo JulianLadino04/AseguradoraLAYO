@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface AutosRepo extends  MongoRepository<CotizacionAutos, String> {
     @Query("{ 'numeroPlaca' : ?0 }")
-    Optional<CotizacionAutos> buscarCuentaPorPlaca(String placa);
+    Optional<CotizacionAutos> buscarPorPlaca(String placa);
 
     @Query("{ 'email' : ?0 }")
     Optional<CotizacionAutos> buscarCuentaPorCorreo(String correo);

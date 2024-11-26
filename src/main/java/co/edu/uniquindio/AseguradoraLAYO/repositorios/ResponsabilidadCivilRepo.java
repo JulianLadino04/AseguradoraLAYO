@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface ResponsabilidadCivilRepo extends  MongoRepository<CotizacionResponsabilidadCivil, String> {
 
     @Query("{ 'cedula' : ?0 }")
-    Optional<CotizacionResponsabilidadCivil> buscarCuentaPorCedula(String cedula);
+    Optional<CotizacionResponsabilidadCivil> buscarPorCedula(String cedula);
 
     @Query("{ 'email' : ?0 }")
-    Optional<CotizacionResponsabilidadCivil> buscarCuentaPorCorreo(String correo);
+    Optional<CotizacionResponsabilidadCivil> buscarPorCorreo(String correo);
 
     @Query("{ '_id' : ?0 }")
     Optional<CotizacionResponsabilidadCivil> findById(ObjectId id);

@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface PymeRepo extends  MongoRepository<CotizacionPyme, String> {
 
     @Query("{ 'cedula' : ?0 }")
-    Optional<CotizacionPyme> buscarCuentaPorCedula(String cedula);
+    Optional<CotizacionPyme> buscarPorCedula(String cedula);
 
     @Query("{ 'email' : ?0 }")
-    Optional<CotizacionPyme> buscarCuentaPorCorreo(String correo);
+    Optional<CotizacionPyme> buscarPorCorreo(String correo);
 
     @Query("{ '_id' : ?0 }")
     Optional<CotizacionPyme> findById(ObjectId id);

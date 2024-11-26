@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface HogarRepo extends  MongoRepository<CotizacionHogar, String> {
 
     @Query("{ 'cedula' : ?0 }")
-    Optional<CotizacionHogar> buscarCuentaPorCedula(String cedula);
+    Optional<CotizacionHogar> buscarPorCedula(String cedula);
 
     @Query("{ 'email' : ?0 }")
-    Optional<CotizacionHogar> buscarCuentaPorCorreo(String correo);
+    Optional<CotizacionHogar> buscarPorCorreo(String correo);
 
     @Query("{ '_id' : ?0 }")
     Optional<CotizacionHogar> findById(ObjectId id);

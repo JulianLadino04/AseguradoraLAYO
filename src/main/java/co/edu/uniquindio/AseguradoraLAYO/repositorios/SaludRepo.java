@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface SaludRepo extends  MongoRepository<CotizacionSalud, String> {
 
     @Query("{ 'cedula' : ?0 }")
-    Optional<CotizacionSalud> buscarCuentaPorCedula(String cedula);
+    Optional<CotizacionSalud> buscarPorCedula(String cedula);
 
     @Query("{ 'email' : ?0 }")
-    Optional<CotizacionSalud> buscarCuentaPorCorreo(String correo);
+    Optional<CotizacionSalud> buscarPorCorreo(String correo);
 
     @Query("{ '_id' : ?0 }")
     Optional<CotizacionSalud> findById(ObjectId id);

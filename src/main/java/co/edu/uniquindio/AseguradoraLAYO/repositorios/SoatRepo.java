@@ -15,4 +15,7 @@ public interface SoatRepo extends MongoRepository<SOAT, String> {
 
     @Query("{ 'numeroPlaca' : ?0 }")
     Optional<SOAT> buscarSoatPorPlaca(String placa);
+
+    @Query(value = "{ 'numeroPlaca' : ?0 }", delete = true)
+    void eliminarPorPlaca(String placa);
 }

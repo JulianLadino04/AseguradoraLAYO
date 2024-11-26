@@ -32,7 +32,7 @@ public class CotizacionAutos {
     private String cedula;
     private String email;
     private String telefono;
-    private String CiudadCirculacion;
+    private String ciudadCirculacion;
     private TipoVehiculo tipo;
     private LocalDateTime fechaNacimiento;
 }
