@@ -23,7 +23,7 @@ public class CotizacionPyme {
     private String id;
 
     private Aseguradora aseguradora;
-    private String nommbre;
+    private String nombre;
     private String cedula;
     private String correo;
     private String telefono;

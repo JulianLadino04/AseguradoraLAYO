@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
-import co.edu.uniquindio.AseguradoraLAYO.dto.AutosDTOs.CrearCotizacionAutosDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.AutosDTOs.CrearCotizacionAutoDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.AutosDTOs.ObtenerAutosDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionAutos;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.AutosRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.AutosServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -24,7 +28,7 @@ public class AutosServicioImpl implements AutosServicio {
     }
 
     @Override
-    public void crearCotizacionAutos(CrearCotizacionAutosDTO autos) throws Exception {
+    public void crearCotizacionAutos(CrearCotizacionAutoDTO autos) throws Exception {
         // Verificar si la placa ya existe
         if (autosRepo.buscarPorPlaca(autos.placa()).isPresent()) {
             throw new Exception("Ya existe una cotización con esta placa");
@@ -69,4 +73,31 @@ public class AutosServicioImpl implements AutosServicio {
 
         System.out.println("Cotización de auto con placa " + placa + " eliminada.");
     }
+
+    @Override
+    public List<ObtenerAutosDTO> listarAutos() throws Exception {
+        List<CotizacionAutos> cotizaciones = autosRepo.findAll(); // Obtener todas las cotizaciones de la base de datos
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones registradas.");
+        }
+
+        // Convertir la lista de CotizacionAutos a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerAutosDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNumeroPlaca(),
+                        cotizacion.getNombre(),
+                        cotizacion.getCedula(),
+                        cotizacion.getEmail(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getCiudadCirculacion(),
+                        cotizacion.getTipo(),
+                        cotizacion.getFechaNacimiento()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
 }

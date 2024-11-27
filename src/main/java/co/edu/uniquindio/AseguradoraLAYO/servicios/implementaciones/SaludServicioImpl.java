@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.SaludDTOs.CrearCotizacionSaludDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.SaludDTOs.ObtenerSaludDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionSalud;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.SaludRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.SaludServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -70,5 +74,28 @@ public class SaludServicioImpl implements SaludServicio {
         saludRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización Salud con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerSaludDTO> listarSalud() throws Exception {
+        List<CotizacionSalud> cotizaciones = saludRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de salud registradas.");
+        }
+
+        // Convertir la lista de CotizacionSalud a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerSaludDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNommbre(),  // Ajusta si es necesario corregir el nombre del campo
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getFechaNacimiento()
+                ))
+                .collect(Collectors.toList());
     }
 }

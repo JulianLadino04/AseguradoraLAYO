@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.ResponsabilidadCivilDTOs.CrearCotizacionResponsabilidadCivilDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.ResponsabilidadCivilDTOs.ObtenerResponsabilidadCivilDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionResponsabilidadCivil;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.ResponsabilidadCivilRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.ResponsabilidadCivilServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -72,5 +76,30 @@ public class ResponsabilidadCivilServicioImpl implements ResponsabilidadCivilSer
         responsabilidadCivilRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización Responsabilidad Civil con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerResponsabilidadCivilDTO> listarResponsabilidadCivil() throws Exception {
+        List<CotizacionResponsabilidadCivil> cotizaciones = responsabilidadCivilRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de responsabilidad civil registradas.");
+        }
+
+        // Convertir la lista de CotizacionResponsabilidadCivil a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerResponsabilidadCivilDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNommbre(),  // Ajusta si es necesario corregir el nombre del campo
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getFechaNacimiento(),
+                        cotizacion.getOcupacion(),
+                        cotizacion.getCiudad()
+                ))
+                .collect(Collectors.toList());
     }
 }

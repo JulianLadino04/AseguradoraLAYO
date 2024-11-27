@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.ProteccionCreditoDTOs.CrearCotizacionProteccionCreditoDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.ProteccionCreditoDTOs.ObtenerProteccionCreditoDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionProteccionCredito;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.ProteccionCreditoRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.ProteccionCreditoServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -71,5 +75,29 @@ public class ProteccionCreditoServicioImpl implements ProteccionCreditoServicio 
         proteccionCreditoRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización de protección de crédito con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerProteccionCreditoDTO> listarProteccionCreditos() throws Exception {
+        List<CotizacionProteccionCredito> cotizaciones = proteccionCreditoRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de protección de crédito registradas.");
+        }
+
+        // Convertir la lista de CotizacionProteccionCredito a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerProteccionCreditoDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNommbre(),  // Ajustar si el nombre del campo en la base de datos es incorrecto
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getFechaNacimiento(),
+                        cotizacion.getValorDeuda()
+                ))
+                .collect(Collectors.toList());
     }
 }

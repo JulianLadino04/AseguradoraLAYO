@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 
-public record CrearCotizacionAutosDTO(
+public record CrearCotizacionAutoDTO(
         @NotBlank(message = "La aseguradora es obligatoria") @Length(max = 30, message = "Ingrese una aseguradora válida") Aseguradora aseguradora,
         @NotBlank(message = "La placa es obligatoria") @Length(max = 6, message = "Ingrese una placa válida") String placa,
         @NotBlank(message = "El tamaño del nombre no es adecuado") @Length(max = 20, message = "El nombre debe tener máximo 20 caracteres") String nombre,

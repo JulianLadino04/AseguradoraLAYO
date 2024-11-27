@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.SoatDTOs.CrearSoatDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.SoatDTOs.ObtenerSoatDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.SOAT;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.SoatRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.SoatServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -60,11 +64,33 @@ public class SoatServicioImpl implements SoatServicio {
         System.out.println("SOAT con placa " + placa + " eliminado exitosamente.");
     }
 
-
     // Método auxiliar para verificar si una placa ya existe
     private boolean existePlaca(String placa) {
         return soatRepo.buscarSoatPorPlaca(placa).isPresent(); // Simulación de consulta a la base de datos
     }
 
+    @Override
+    public List<ObtenerSoatDTO> listarSoat() throws Exception {
+        List<SOAT> soats = soatRepo.findAll();  // Obtener todas las cotizaciones de SOAT
+
+        if (soats.isEmpty()) {
+            throw new Exception("No hay cotizaciones de SOAT registradas.");
+        }
+
+        // Convertir la lista de SOAT a una lista de DTOs
+        return soats.stream()
+                .map(soat -> new ObtenerSoatDTO(
+                        soat.getId(),
+                        soat.getNumeroPlaca(),
+                        soat.getNombre(),
+                        soat.getCedula(),
+                        soat.getCorreo(),
+                        soat.getTelefono(),
+                        soat.getDireccion(),
+                        soat.getAseguradora(),
+                        soat.getTipo()
+                ))
+                .collect(Collectors.toList());
+    }
 }
 

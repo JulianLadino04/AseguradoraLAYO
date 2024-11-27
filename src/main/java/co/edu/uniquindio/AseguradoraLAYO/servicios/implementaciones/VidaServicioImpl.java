@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
-import co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOS.CrearCotizacionVidaDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOs.CrearCotizacionVidaDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOs.ObtenerVidaDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionVida;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.VidaRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.VidaServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -71,5 +75,29 @@ public class VidaServicioImpl implements VidaServicio {
         vidaRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización Vida con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerVidaDTO> listarVida() throws Exception {
+        List<CotizacionVida> cotizaciones = vidaRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de vida registradas.");
+        }
+
+        // Convertir la lista de CotizacionVida a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerVidaDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNommbre(),  // Ajusta si es necesario corregir el nombre del campo
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getOcupacion(),
+                        cotizacion.getFechaNacimiento()
+                ))
+                .collect(Collectors.toList());
     }
 }

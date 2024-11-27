@@ -1,5 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.dto.SoatDTOs;
 
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.Aseguradora;
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.TipoVehiculo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -12,6 +14,8 @@ public record CrearSoatDTO(
         @NotBlank(message = "El tamano de la cedula no es adecuado") @Length(max = 10) String cedula,
         @Length(max = 10, message = "Ingrese un telefono valido") String telefono,
         @Length(max = 30, message = "Ingrese una direccion valida") String direccion,
-        @NotBlank @Length(max = 30, message = "Ingrese un correo valido") @Email String correo
+        @NotBlank @Length(max = 30, message = "Ingrese un correo valido") @Email String correo,
+        Aseguradora aseguradora,
+        TipoVehiculo tipo
 ) {
 }

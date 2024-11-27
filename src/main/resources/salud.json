@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "aseguradora": "ASEGURADORA_X",
+    "nommbre": "Juan Pérez",
+    "cedula": "12345678",
+    "correo": "juan.perez@example.com",
+    "telefono": "3001234567",
+    "direccion": "Calle 123, Medellín",
+    "fechaNacimiento": "1990-05-15T00:00:00"
+  },
+  {
+    "id": "2",
+    "aseguradora": "ASEGURADORA_Y",
+    "nommbre": "Ana Gómez",
+    "cedula": "87654321",
+    "correo": "ana.gomez@example.com",
+    "telefono": "3107654321",
+    "direccion": "Carrera 45, Bogotá",
+    "fechaNacimiento": "1985-11-25T00:00:00"
+  },
+  {
+    "id": "3",
+    "aseguradora": "ASEGURADORA_Z",
+    "nommbre": "Carlos Ramírez",
+    "cedula": "12309876",
+    "correo": "carlos.ramirez@example.com",
+    "telefono": "3209876543",
+    "direccion": "Avenida 8, Cali",
+    "fechaNacimiento": "1980-03-20T00:00:00"
+  }
+]

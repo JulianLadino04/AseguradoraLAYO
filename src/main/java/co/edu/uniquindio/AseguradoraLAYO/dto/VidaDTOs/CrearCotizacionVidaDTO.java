@@ -1,4 +1,4 @@
-package co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOS;
+package co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOs;
 
 import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.Aseguradora;
 import jakarta.validation.constraints.Email;

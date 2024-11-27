@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.PymeDTOs.CrearCotizacionPymeDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.PymeDTOs.ObtenerPymeDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionPyme;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.PymeRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.PymeServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -37,7 +41,7 @@ public class PymeServicioImpl implements PymeServicio {
         // Crear una nueva cotización de Pyme
         CotizacionPyme nuevaCotizacion = CotizacionPyme.builder()
                 .aseguradora(pyme.aseguradora())
-                .nommbre(pyme.nombre())
+                .nombre(pyme.nombre())
                 .cedula(pyme.cedula())
                 .correo(pyme.correo())
                 .telefono(pyme.telefono())
@@ -76,5 +80,34 @@ public class PymeServicioImpl implements PymeServicio {
         pymeRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización Pyme con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerPymeDTO> listarPymes() throws Exception {
+        List<CotizacionPyme> cotizaciones = pymeRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de Pyme registradas.");
+        }
+
+        // Convertir la lista de CotizacionPyme a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerPymeDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNombre(),  // Ajusta si es necesario corregir el nombre del campo
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getFechaNacimiento(),
+                        cotizacion.getValorMercancia(),
+                        cotizacion.getValorMaquinaria(),
+                        cotizacion.getValorComercial(),
+                        cotizacion.getValorElectrico(),
+                        cotizacion.getValorMuebles(),
+                        cotizacion.getTipo()
+                ))
+                .collect(Collectors.toList());
     }
 }

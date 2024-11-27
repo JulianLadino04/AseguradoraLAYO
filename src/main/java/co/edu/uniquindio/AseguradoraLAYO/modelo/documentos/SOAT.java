@@ -1,5 +1,6 @@
 package co.edu.uniquindio.AseguradoraLAYO.modelo.documentos;
 
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.Aseguradora;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.TipoVehiculo;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -19,6 +20,7 @@ public class SOAT {
     @EqualsAndHashCode.Include
     private String id;
 
+    private Aseguradora aseguradora;
     private String numeroPlaca;
     private String nombre;
     private String cedula;

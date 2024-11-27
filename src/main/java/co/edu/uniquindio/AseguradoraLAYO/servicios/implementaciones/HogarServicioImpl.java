@@ -1,6 +1,7 @@
 package co.edu.uniquindio.AseguradoraLAYO.servicios.implementaciones;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.HogarDTOs.CrearCotizacionHogarDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.HogarDTOs.ObtenerHogarDTO;
 import co.edu.uniquindio.AseguradoraLAYO.modelo.documentos.CotizacionHogar;
 import co.edu.uniquindio.AseguradoraLAYO.repositorios.HogarRepo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.HogarServicio;
@@ -9,6 +10,9 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.EmailDTOs.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -73,5 +77,31 @@ public class HogarServicioImpl implements HogarServicio {
         hogarRepo.delete(cotizacionOpt.get());
 
         System.out.println("Cotización de hogar con id " + cedula + " eliminada.");
+    }
+
+    @Override
+    public List<ObtenerHogarDTO> listarHogares() throws Exception {
+        List<CotizacionHogar> cotizaciones = hogarRepo.findAll(); // Obtener todas las cotizaciones
+
+        if (cotizaciones.isEmpty()) {
+            throw new Exception("No hay cotizaciones de hogar registradas.");
+        }
+
+        // Convertir la lista de CotizacionHogar a una lista de DTOs
+        return cotizaciones.stream()
+                .map(cotizacion -> new ObtenerHogarDTO(
+                        cotizacion.getId(),
+                        cotizacion.getAseguradora(),
+                        cotizacion.getNommbre(),
+                        cotizacion.getCedula(),
+                        cotizacion.getCorreo(),
+                        cotizacion.getTelefono(),
+                        cotizacion.getDireccion(),
+                        cotizacion.getFechaNacimiento(),
+                        cotizacion.getValorComercial(),
+                        cotizacion.getValorElectrico(),
+                        cotizacion.getValorMuebles()
+                ))
+                .collect(Collectors.toList());
     }
 }

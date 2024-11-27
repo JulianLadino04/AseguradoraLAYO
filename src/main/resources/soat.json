@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "numeroPlaca": "ABC123",
+    "nombre": "Juan Pérez",
+    "cedula": "12345678",
+    "correo": "juan.perez@example.com",
+    "telefono": "3001234567",
+    "direccion": "Calle 123, Medellín",
+    "tipo": "PUBLICO"
+  },
+  {
+    "id": "2",
+    "numeroPlaca": "XYZ456",
+    "nombre": "Ana Gómez",
+    "cedula": "87654321",
+    "correo": "ana.gomez@example.com",
+    "telefono": "3107654321",
+    "direccion": "Carrera 45, Bogotá",
+    "tipo": "PARTICULAR"
+  },
+  {
+    "id": "3",
+    "numeroPlaca": "LMN789",
+    "nombre": "Carlos Ramírez",
+    "cedula": "12309876",
+    "correo": "carlos.ramirez@example.com",
+    "telefono": "3209876543",
+    "direccion": "Avenida 8, Cali",
+    "tipo": "PARTICULAR"
+  }
+]
