@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "aseguradora": "ASEGURADORA_X",
+    "aseguradora": "SURA",
     "nommbre": "Juan Pérez",
     "cedula": "12345678",
     "correo": "juan.perez@example.com",
@@ -14,7 +14,7 @@
   },
   {
     "id": "2",
-    "aseguradora": "ASEGURADORA_Y",
+    "aseguradora": "BOLIVAR",
     "nommbre": "Ana Gómez",
     "cedula": "87654321",
     "correo": "ana.gomez@example.com",
@@ -27,7 +27,7 @@
   },
   {
     "id": "3",
-    "aseguradora": "ASEGURADORA_Z",
+    "aseguradora": "COLPATRIA",
     "nommbre": "Carlos Ramírez",
     "cedula": "12309876",
     "correo": "carlos.ramirez@example.com",

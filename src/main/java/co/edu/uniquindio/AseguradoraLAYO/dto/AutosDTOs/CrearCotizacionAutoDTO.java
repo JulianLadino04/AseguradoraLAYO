@@ -14,6 +14,7 @@ public record CrearCotizacionAutoDTO(
         @NotBlank(message = "El tamaño del nombre no es adecuado") @Length(max = 20, message = "El nombre debe tener máximo 20 caracteres") String nombre,
         @NotBlank(message = "La cédula es obligatoria") @Length(max = 10, message = "La cédula debe tener máximo 10 caracteres") String cedula,
         @NotBlank @Email(message = "Ingrese un correo válido") @Length(max = 30, message = "El correo debe tener máximo 30 caracteres") String correo,
+        @Length(max = 30, message = "Ingrese una direccion valida") String direccion,
         @Length(max = 10, message = "Ingrese un teléfono válido") String telefono,
         @NotBlank(message = "La ciudad de circulación es obligatoria") @Length(max = 30, message = "La ciudad debe tener máximo 30 caracteres") String ciudadCirculacion,
         @NotBlank(message = "El tipo de vehículo es obligatorio") @Length(max = 15, message = "El tipo de vehículo debe tener máximo 15 caracteres") TipoVehiculo tipo,

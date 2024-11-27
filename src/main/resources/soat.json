@@ -1,6 +1,7 @@
 [
   {
     "id": "1",
+    "aseguradora": "SURA",
     "numeroPlaca": "ABC123",
     "nombre": "Juan Pérez",
     "cedula": "12345678",
@@ -11,6 +12,7 @@
   },
   {
     "id": "2",
+    "aseguradora": "COLPATRIA",
     "numeroPlaca": "XYZ456",
     "nombre": "Ana Gómez",
     "cedula": "87654321",
@@ -21,6 +23,7 @@
   },
   {
     "id": "3",
+    "aseguradora": "SURA",
     "numeroPlaca": "LMN789",
     "nombre": "Carlos Ramírez",
     "cedula": "12309876",

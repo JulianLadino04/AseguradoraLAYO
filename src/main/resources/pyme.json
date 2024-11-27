@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "aseguradora": "ASEGURADORA_X",
+    "aseguradora": "EQUIDAD",
     "nombre": "Juan Pérez",
     "cedula": "12345678",
     "correo": "juan.perez@example.com",
@@ -13,11 +13,11 @@
     "valorComercial": 50000000,
     "valorElectrico": 2000000,
     "valorMuebles": 1000000,
-    "tipo": "OFICINA"
+    "tipo": "ARRENDADO"
   },
   {
     "id": "2",
-    "aseguradora": "ASEGURADORA_Y",
+    "aseguradora": "BOLIVAR",
     "nombre": "Ana Gómez",
     "cedula": "87654321",
     "correo": "ana.gomez@example.com",
@@ -29,11 +29,11 @@
     "valorComercial": 70000000,
     "valorElectrico": 5000000,
     "valorMuebles": 2000000,
-    "tipo": "ALMACÉN"
+    "tipo": "ARRENDADO"
   },
   {
     "id": "3",
-    "aseguradora": "ASEGURADORA_Z",
+    "aseguradora": "SURA",
     "nombre": "Carlos Ramírez",
     "cedula": "12309876",
     "correo": "carlos.ramirez@example.com",
@@ -45,6 +45,6 @@
     "valorComercial": 80000000,
     "valorElectrico": 4000000,
     "valorMuebles": 3000000,
-    "tipo": "FABRICA"
+    "tipo": "PROPIO"
   }
 ]

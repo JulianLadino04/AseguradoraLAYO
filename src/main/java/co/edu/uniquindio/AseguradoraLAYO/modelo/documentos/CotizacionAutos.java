@@ -31,6 +31,7 @@ public class CotizacionAutos {
     private String nombre;
     private String cedula;
     private String email;
+    private String direccion;
     private String telefono;
     private String ciudadCirculacion;
     private TipoVehiculo tipo;

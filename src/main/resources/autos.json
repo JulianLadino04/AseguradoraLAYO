@@ -1,38 +1,41 @@
 [
   {
     "id": "1",
-    "aseguradora": "ASEGURADORA_X",
+    "aseguradora": "BOLIVAR",
     "numeroPlaca": "ABC123",
     "nombre": "Juan Pérez",
     "cedula": "12345678",
     "email": "juan.perez@example.com",
+    "direccion": "Carrera 1",
     "telefono": "3001234567",
     "ciudadCirculacion": "Medellín",
-    "tipo": "SEDAN",
+    "tipo": "PARTICULAR",
     "fechaNacimiento": "1990-05-15T00:00:00"
   },
   {
     "id": "2",
-    "aseguradora": "ASEGURADORA_Y",
+    "aseguradora": "SURA",
     "numeroPlaca": "XYZ789",
     "nombre": "Ana Gómez",
     "cedula": "87654321",
     "email": "ana.gomez@example.com",
+    "direccion": "Carrera 2",
     "telefono": "3107654321",
     "ciudadCirculacion": "Bogotá",
-    "tipo": "SUV",
+    "tipo": "PARTICULAR",
     "fechaNacimiento": "1985-11-25T00:00:00"
   },
   {
     "id": "3",
-    "aseguradora": "ASEGURADORA_Z",
+    "aseguradora": "SURA",
     "numeroPlaca": "LMN456",
     "nombre": "Carlos Ramírez",
     "cedula": "12309876",
     "email": "carlos.ramirez@example.com",
+    "direccion": "Carrera 3",
     "telefono": "3209876543",
     "ciudadCirculacion": "Cali",
-    "tipo": "CAMIONETA",
+    "tipo": "PUBLICO",
     "fechaNacimiento": "1980-03-20T00:00:00"
   }
 ]
