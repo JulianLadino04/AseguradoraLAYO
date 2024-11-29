@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -106,7 +107,7 @@ public class CuentaServicioImpl implements CuentaServicio {
                 )
         );
         cuentaRepo.save(nuevaCuenta);
-        emailServicio.enviarCorreo(new EmailDTO("Codigo de activación de cuenta de Unieventos", "El codigo de activacion asignado para activar la cuenta es el siguiente " + codigoActivacion, nuevaCuenta.getEmail()));
+        emailServicio.enviarCorreo(new EmailDTO("Codigo de activación de cuenta de Aseguradora LAYO", "El codigo de activacion asignado para activar la cuenta es el siguiente " + codigoActivacion, nuevaCuenta.getEmail()));
 
     }
 
@@ -207,7 +208,7 @@ public class CuentaServicioImpl implements CuentaServicio {
 
         try {
             emailServicio.enviarCorreo(new EmailDTO(
-                    "Código de recuperación de contraseña de Unieventos",
+                    "Código de recuperación de contraseña de Aseguradora LAYO",
                     "El código de recuperación asignado para reestablecer la contraseña es el siguiente: " + codigoValidacion,
                     cuentaUsuario.getEmail()
             ));
@@ -253,23 +254,39 @@ public class CuentaServicioImpl implements CuentaServicio {
 
     @Override
     public TokenDTO iniciarSesion(LoginDTO loginDTO) throws Exception {
+        try {
+            // Obtén la cuenta por el correo electrónico
+            Cuenta cuenta = obtenerPorEmail(loginDTO.correo());
+            if (cuenta == null) {
+                throw new Exception("Cuenta no encontrada con ese correo electrónico");
+            }
 
-        Cuenta cuenta = obtenerPorEmail(loginDTO.correo());
+            System.out.println("Credenciales del usuario encontrado: " + cuenta.getEmail());
+            System.out.println("Estado de la cuenta: " + cuenta.getEstadoCuenta());
 
-        System.out.println("credenciales:" + cuenta.getEmail() + " PS:" + cuenta.getPassword()+"--");
-        System.out.println("credenciales ingresadas:" + loginDTO.correo() + " PS:" + loginDTO.password()+"--");
+            // Verifica si la cuenta está activa
+            if (cuenta.getEstadoCuenta() != EstadoCuenta.ACTIVO) {
+                throw new Exception("La cuenta no está activa");
+            }
 
-        if (cuenta.getEstadoCuenta() != EstadoCuenta.ACTIVO) {
-            throw new Exception("La cuenta no está activa");
+            // Verifica si la contraseña ingresada coincide
+            if (!passwordEncoder.matches(loginDTO.password(), cuenta.getPassword())) {
+                throw new Exception("La contraseña es incorrecta");
+            }
+
+            // Genera el token
+            Map<String, Object> map = construirClaims(cuenta);
+            return new TokenDTO(jwtUtils.generarToken(cuenta.getEmail(), map));
+        } catch (Exception e) {
+            // Registra el error completo
+            System.out.println("Error en la autenticación: " + e.getMessage());
+            e.printStackTrace();
+            throw new Exception("Error en la autenticación: " + e.getMessage());
         }
-
-        if (!passwordEncoder.matches(loginDTO.password(), cuenta.getPassword())) {
-            throw new Exception("La contraseña es incorrecta");
-        }
-
-        Map<String, Object> map = construirClaims(cuenta);
-        return new TokenDTO(jwtUtils.generarToken(cuenta.getEmail(), map));
     }
+
+
+
 
     @Override
     public List<ItemCuentaDTO> listarCuentas() throws Exception {
@@ -287,16 +304,28 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
 
     private Map<String, Object> construirClaims(Cuenta cuenta) {
-        return Map.of(
-                "rol", cuenta.getRol(),
-                "nombre", cuenta.getUsuario().getNombre(),
-                "id", cuenta.getId(),
-                "telefono", cuenta.getUsuario().getTelefono(),
-                "direccion", cuenta.getUsuario().getDireccion()
+        if (cuenta == null) {
+            throw new IllegalArgumentException("La cuenta es nula");
+        }
 
+        if (cuenta.getUsuario() == null) {
+            throw new IllegalArgumentException("El usuario asociado con la cuenta es nulo");
+        }
 
-        );
+        // Crear un mapa vacío
+        Map<String, Object> claims = new HashMap<>();
+
+        // Añadir los claims con un valor por defecto si son nulos
+        claims.put("rol", cuenta.getRol() != null ? cuenta.getRol() : "Desconocido");
+        claims.put("nombre", cuenta.getUsuario().getNombre() != null ? cuenta.getUsuario().getNombre() : "Desconocido");
+        claims.put("id", cuenta.getId() != null ? cuenta.getId() : "Desconocido");
+        claims.put("telefono", cuenta.getUsuario().getTelefono() != null ? cuenta.getUsuario().getTelefono() : "Desconocido");
+        claims.put("direccion", cuenta.getUsuario().getDireccion() != null ? cuenta.getUsuario().getDireccion() : "Desconocido");
+
+        return claims;
     }
+
+
 
 
     @Override
@@ -310,7 +339,7 @@ public class CuentaServicioImpl implements CuentaServicio {
 
 
         if (cuenta_usuario.getEstadoCuenta() == EstadoCuenta.ELIMINADO) {
-            throw new Exception("La cuenta no esta disponible en Unievento");
+            throw new Exception("La cuenta no esta disponible en la plataforma");
         }
 
         if (cuenta_usuario.getEstadoCuenta() == EstadoCuenta.ACTIVO) {
