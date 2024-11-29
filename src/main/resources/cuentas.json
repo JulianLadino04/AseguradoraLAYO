@@ -23,9 +23,8 @@
   },
   {
     "id": "60d21b4667d0d8992e610c86",
-    "email": "usuario2@example.com",
-    "password": "password456",
-    "rol": "ADMINISTRADOR",
+    "email": "admin@gmail.com",
+    "password": "1234567",
     "rol": "ADMINISTRADOR",
     "codigoValidacionRegistro": {
       "codigoValidacion": "def456",

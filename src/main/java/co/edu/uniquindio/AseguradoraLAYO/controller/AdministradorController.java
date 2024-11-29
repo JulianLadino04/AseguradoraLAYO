@@ -2,6 +2,7 @@ package co.edu.uniquindio.AseguradoraLAYO.controller;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.AutosDTOs.ObtenerAutosDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.HogarDTOs.ObtenerHogarDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.PeticionDTOs.ObtenerPeticionDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.ProteccionCreditoDTOs.ObtenerProteccionCreditoDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.PymeDTOs.ObtenerPymeDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.ResponsabilidadCivilDTOs.ObtenerResponsabilidadCivilDTO;
@@ -30,6 +31,7 @@ public class AdministradorController {
     private final SaludServicio saludServicio;
     private final VidaServicio vidaServicio;
     private final SoatServicio soatServicio;
+    private final PeticionServicio peticionServicio;
 
     // Métodos para listar
 
@@ -79,6 +81,12 @@ public class AdministradorController {
     public ResponseEntity<MensajeDTO<List<ObtenerVidaDTO>>> listarVida() throws Exception {
         List<ObtenerVidaDTO> vidas = vidaServicio.listarVida();
         return ResponseEntity.ok(new MensajeDTO<>(false, vidas));
+    }
+
+    @GetMapping("/peticion/listar")
+    public ResponseEntity<MensajeDTO<List<ObtenerPeticionDTO>>> listarPeticion() throws Exception {
+        List<ObtenerPeticionDTO> peticiones = peticionServicio.listarPeticiones();
+        return ResponseEntity.ok(new MensajeDTO<>(false, peticiones));
     }
 
     // Métodos para eliminar
@@ -160,6 +168,16 @@ public class AdministradorController {
             return ResponseEntity.ok(new MensajeDTO<>(false, "Soat eliminado"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar Soat: " + e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/peticion/eliminar/{id}")
+    public ResponseEntity<MensajeDTO<String>> eliminarPeticion(@PathVariable String cedula) {
+        try {
+            peticionServicio.eliminarPeticion(cedula);
+            return ResponseEntity.ok(new MensajeDTO<>(false, "Peticion eliminada"));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar Peticion: " + e.getMessage()));
         }
     }
 }

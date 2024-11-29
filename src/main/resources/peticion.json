@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Carlos Perez",
+    "cedula": "123456789",
+    "correo": "carlos.perez@example.com",
+    "telefono": "3001234567",
+    "asegurar": "Vehículo",
+    "mensaje": "Quiero asegurar mi vehículo nuevo."
+  },
+  {
+    "nombre": "Maria Gomez",
+    "cedula": "987654321",
+    "correo": "maria.gomez@example.com",
+    "telefono": "3109876543",
+    "asegurar": "Hogar",
+    "mensaje": "Necesito asegurar mi casa."
+  },
+  {
+    "nombre": "Luis Martinez",
+    "cedula": "456789123",
+    "correo": "luis.martinez@example.com",
+    "telefono": "3204567890",
+    "asegurar": "Negocio",
+    "mensaje": "Deseo información sobre seguros para mi negocio."
+  }
+]

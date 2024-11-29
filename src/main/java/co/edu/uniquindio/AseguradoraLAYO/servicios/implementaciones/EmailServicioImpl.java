@@ -25,7 +25,7 @@ public class EmailServicioImpl implements EmailServicio {
         String destinatarioLimpio = emailDTO.destinatario().trim().replace("\"", "");
 
         Email email = EmailBuilder.startingBlank()
-                .from("unieventos.uniquindio@gmail.com")
+                .from("aseguradoralayo@gmail.com")
                 .to(destinatarioLimpio)
                 //.cc("assdsds", "sdsdsdsd", "aasasas")
                 .withSubject(emailDTO.asunto())
@@ -33,7 +33,7 @@ public class EmailServicioImpl implements EmailServicio {
                 .buildEmail();
 
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "unieventos.uniquindio@gmail.com", "bngo ktya tpae mzec") // Correo como usuario SMTP
+                .withSMTPServer("smtp.gmail.com", 587, "aseguradoralayo@gmail.com", "malx djiy tewv bdud") // Correo como usuario SMTP
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {
@@ -57,7 +57,7 @@ public class EmailServicioImpl implements EmailServicio {
 
         // Construir el correo
         Email email = EmailBuilder.startingBlank()
-                .from("unieventos.uniquindio@gmail.com")
+                .from("aseguradoralayo@gmail.com")
                 .to(destinatarioLimpio)
                 .withSubject(emailDTO.asunto())
                 .withPlainText(emailDTO.cuerpo())  // Texto plano (puedes cambiar a HTML si lo necesitas)
@@ -66,7 +66,7 @@ public class EmailServicioImpl implements EmailServicio {
 
         // Configurar el mailer y enviar el correo
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "unieventos.uniquindio@gmail.com", "bngo ktya tpae mzec")
+                .withSMTPServer("smtp.gmail.com", 587, "aseguradoralayo@gmail.com", "malx djiy tewv bdud")
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {
@@ -86,14 +86,14 @@ public class EmailServicioImpl implements EmailServicio {
         String destinatarioLimpio = emailDTO.destinatario().trim().replace("\"", "");
 
         Email email = EmailBuilder.startingBlank()
-                .from("unieventos.uniquindio@gmail.com")
+                .from("aseguradoralayoo@gmail.com")
                 .to(destinatarioLimpio)
                 .withSubject(emailDTO.asunto())
                 .withPlainText(emailDTO.cuerpo())
                 .buildEmail();
 
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "unieventos.uniquindio@gmail.com", "bngo ktya tpae mzec") // Correo como usuario SMTP
+                .withSMTPServer("smtp.gmail.com", 587, "aseguradoralayo@gmail.com", "malx djiy tewv bdud") // Correo como usuario SMTP
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {
@@ -109,14 +109,14 @@ public class EmailServicioImpl implements EmailServicio {
         String destinatarioLimpio = correo_destino.trim().replace("\"", "");
 
         Email email = EmailBuilder.startingBlank()
-                .from("unieventos.uniquindio@gmail.com")
+                .from("aseguradoralayo@gmail.com")
                 .to(destinatarioLimpio)
-                .withSubject("Codigo de recuperacion de contraseña de Unieventos")
+                .withSubject("Codigo de recuperacion de contraseña de Aseguradora LAYO")
                 .withPlainText("000000")
                 .buildEmail();
 
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "unieventos.uniquindio@gmail.com", "bngo ktya tpae mzec") // Correo como usuario SMTP
+                .withSMTPServer("smtp.gmail.com", 587, "aseguradoralayo@gmail.com", "malx djiy tewv bdud") // Correo como usuario SMTP
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {

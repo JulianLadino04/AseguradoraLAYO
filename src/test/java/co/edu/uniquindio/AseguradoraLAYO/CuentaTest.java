@@ -64,7 +64,7 @@ public class CuentaTest {
 
     @Test
     public void testBuscarCuentaPorCorreo() {
-        Optional<Cuenta> cuentaOptional = cuentaRepo.buscarCuentaPorCorreo("usuario2@example.com");
+        Optional<Cuenta> cuentaOptional = cuentaRepo.buscarCuentaPorCorreo("usuario3@example.com");
         assertTrue(cuentaOptional.isPresent(), "La cuenta debería estar presente");
         assertEquals("87654321", cuentaOptional.get().getUsuario().getCedula(), "La cédula debería coincidir");
     }
@@ -105,7 +105,7 @@ public class CuentaTest {
 
     @Test
     public void testValidarCuentaPorCorreoYCodigo() {
-        String email = "usuario2@example.com";  // correo del usuario
+        String email = "usuario3@example.com";  // correo del usuario
         String codigoValidacion = "def456";      // código de validación
 
         Optional<Cuenta> optionalCuenta = cuentaRepo.buscarCuentaPorCorreo(email);

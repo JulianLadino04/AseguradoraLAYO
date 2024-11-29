@@ -2,6 +2,7 @@ package co.edu.uniquindio.AseguradoraLAYO.controller;
 
 import co.edu.uniquindio.AseguradoraLAYO.dto.AutosDTOs.CrearCotizacionAutoDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.HogarDTOs.CrearCotizacionHogarDTO;
+import co.edu.uniquindio.AseguradoraLAYO.dto.PeticionDTOs.CrearPeticionDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.ProteccionCreditoDTOs.CrearCotizacionProteccionCreditoDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.PymeDTOs.CrearCotizacionPymeDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.ResponsabilidadCivilDTOs.CrearCotizacionResponsabilidadCivilDTO;
@@ -27,6 +28,7 @@ public class ClienteController {
     private final SaludServicio saludServicio;
     private final VidaServicio vidaServicio;
     private final SoatServicio soatServicio;
+    private final PeticionServicio peticionServicio;
 
     // Crear Cotización para Autos
     @PostMapping("/autos/cotizar")
@@ -113,6 +115,17 @@ public class ClienteController {
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotización para Soat creada correctamente"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al crear Soat: " + e.getMessage()));
+        }
+    }
+
+    // Crear Peticion
+    @PostMapping("/peticion/crear")
+    public ResponseEntity<MensajeDTO<String>> crearPeticion(@RequestBody CrearPeticionDTO crearPeticionDTO) {
+        try {
+            peticionServicio.crearPeticion(crearPeticionDTO);
+            return ResponseEntity.ok(new MensajeDTO<>(false, "Petición creada correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al crear Petición: " + e.getMessage()));
         }
     }
 }
