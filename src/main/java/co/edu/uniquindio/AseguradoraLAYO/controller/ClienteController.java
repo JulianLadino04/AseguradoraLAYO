@@ -9,11 +9,18 @@ import co.edu.uniquindio.AseguradoraLAYO.dto.ResponsabilidadCivilDTOs.CrearCotiz
 import co.edu.uniquindio.AseguradoraLAYO.dto.SaludDTOs.CrearCotizacionSaludDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.SoatDTOs.CrearSoatDTO;
 import co.edu.uniquindio.AseguradoraLAYO.dto.VidaDTOs.CrearCotizacionVidaDTO;
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.Aseguradora;
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.TipoInmueble;
+import co.edu.uniquindio.AseguradoraLAYO.modelo.enums.TipoVehiculo;
 import co.edu.uniquindio.AseguradoraLAYO.servicios.interfaces.*;
 import co.edu.uniquindio.AseguradoraLAYO.dto.TokenDTOs.MensajeDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -127,5 +134,29 @@ public class ClienteController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al crear Petición: " + e.getMessage()));
         }
+    }
+
+    @GetMapping("/aseguradoras")
+    public ResponseEntity<MensajeDTO<List<String>>> obtenerAseguradoras() {
+        List<String> aseguradoras = Arrays.stream(Aseguradora.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new MensajeDTO<>(false, aseguradoras));
+    }
+
+    @GetMapping("/tipos-vehiculo")
+    public ResponseEntity<MensajeDTO<List<String>>> obtenerTiposVehiculo() {
+        List<String> tiposVehiculo = Arrays.stream(TipoVehiculo.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new MensajeDTO<>(false, tiposVehiculo));
+    }
+
+    @GetMapping("/tipos-inmueble")
+    public ResponseEntity<MensajeDTO<List<String>>> obtenerTiposInmueble() {
+        List<String> tiposInmueble = Arrays.stream(TipoInmueble.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new MensajeDTO<>(false, tiposInmueble));
     }
 }

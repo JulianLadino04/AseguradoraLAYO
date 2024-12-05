@@ -75,7 +75,7 @@ public class CuentaServicioImpl implements CuentaServicio {
     @Override
     public void crearCuenta(CrearCuentaDTO cuenta) throws Exception {
 
-        System.out.println( cuenta.nombre() +"  "+ cuenta.correo());
+        System.out.println(cuenta.nombre() + "  " + cuenta.correo());
 
         if (existeCedula(cuenta.cedula())) {
             throw new Exception("Ya existe una cuenta con esta cedula");
@@ -90,10 +90,17 @@ public class CuentaServicioImpl implements CuentaServicio {
 
         nuevaCuenta.setPassword(passwordEncoder.encode(cuenta.password()));
 
-        nuevaCuenta.setRol(Rol.CLIENTE);
+        // Verifica si el correo es admin@gmail.com
+        if ("admin@gmail.com".equals(cuenta.correo())) {
+            nuevaCuenta.setRol(Rol.ADMINISTRADOR);  // Asigna el rol de ADMINISTRADOR
+            nuevaCuenta.setEstadoCuenta(EstadoCuenta.ACTIVO);  // Asigna la cuenta como ACTIVA
+        } else {
+            nuevaCuenta.setRol(Rol.CLIENTE);  // Si no es admin, asigna el rol de CLIENTE
+            nuevaCuenta.setEstadoCuenta(EstadoCuenta.INACTIVO);  // La cuenta estará INACTIVA por defecto
+        }
+
         nuevaCuenta.setFechaRegistro(LocalDateTime.now());
-        nuevaCuenta.setEstadoCuenta(EstadoCuenta.INACTIVO);
-        nuevaCuenta.setUsuario( Usuario.builder()
+        nuevaCuenta.setUsuario(Usuario.builder()
                 .cedula(cuenta.cedula())
                 .direccion(cuenta.direccion())
                 .nombre(cuenta.nombre())
@@ -102,14 +109,21 @@ public class CuentaServicioImpl implements CuentaServicio {
         String codigoActivacion = generarCodigoValidacion();
         nuevaCuenta.setCodigoValidacionRegistro(
                 new CodigoValidacion(
-                        codigoActivacion ,
+                        codigoActivacion,
                         LocalDateTime.now()
                 )
         );
+
         cuentaRepo.save(nuevaCuenta);
-        emailServicio.enviarCorreo(new EmailDTO("Codigo de activación de cuenta de Aseguradora LAYO", "El codigo de activacion asignado para activar la cuenta es el siguiente " + codigoActivacion, nuevaCuenta.getEmail()));
+
+        // Enviar correo de activación solo si no es administrador
+        if (!"admin@gmail.com".equals(cuenta.correo())) {
+            emailServicio.enviarCorreo(new EmailDTO("Codigo de activación de cuenta de Aseguradora LAYO",
+                    "El código de activación asignado para activar la cuenta es el siguiente: " + codigoActivacion, nuevaCuenta.getEmail()));
+        }
 
     }
+
 
     private boolean existeCedula(String cedula) {
         return cuentaRepo.buscarCuentaPorCedula(cedula).isPresent();
@@ -257,9 +271,6 @@ public class CuentaServicioImpl implements CuentaServicio {
         try {
             // Obtén la cuenta por el correo electrónico
             Cuenta cuenta = obtenerPorEmail(loginDTO.correo());
-            if (cuenta == null) {
-                throw new Exception("Cuenta no encontrada con ese correo electrónico");
-            }
 
             System.out.println("Credenciales del usuario encontrado: " + cuenta.getEmail());
             System.out.println("Estado de la cuenta: " + cuenta.getEstadoCuenta());
