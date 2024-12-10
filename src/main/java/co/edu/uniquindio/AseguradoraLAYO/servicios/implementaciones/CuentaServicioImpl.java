@@ -91,7 +91,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         nuevaCuenta.setPassword(passwordEncoder.encode(cuenta.password()));
 
         // Verifica si el correo es admin@gmail.com
-        if ("admin@gmail.com".equals(cuenta.correo())) {
+        if ("admin@gmail.com".equals(cuenta.correo()) && "1234567".equals(cuenta.password())) {
             nuevaCuenta.setRol(Rol.ADMINISTRADOR);  // Asigna el rol de ADMINISTRADOR
             nuevaCuenta.setEstadoCuenta(EstadoCuenta.ACTIVO);  // Asigna la cuenta como ACTIVA
         } else {
