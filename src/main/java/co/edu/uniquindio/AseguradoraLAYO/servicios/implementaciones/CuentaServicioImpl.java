@@ -148,7 +148,7 @@ public class CuentaServicioImpl implements CuentaServicio {
     @Override
     public String editarCuenta(EditarCuentaDTO cuenta) throws Exception {
 
-        Cuenta cuentaUsuario = obtenerCuenta(cuenta.id());
+        Cuenta cuentaUsuario = obtenerCuenta(cuenta.email());
 
         if (cuentaUsuario.getEstadoCuenta() != EstadoCuenta.ACTIVO) {
             throw new Exception("La cuenta no está activa");
@@ -165,9 +165,9 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
 
     @Override
-    public String eliminarCuenta(String id) throws Exception {
+    public String eliminarCuenta(String email) throws Exception {
 
-        Cuenta cuentaUsuario = obtenerCuenta(id);
+        Cuenta cuentaUsuario = obtenerCuenta(email);
 
         if (cuentaUsuario.getEstadoCuenta() != EstadoCuenta.ACTIVO) {
             throw new Exception("La cuenta no está activa");
@@ -186,7 +186,7 @@ public class CuentaServicioImpl implements CuentaServicio {
             return null;
         }
         return new InformacionCuentaDTO(
-                new ObjectId(cuentaUsuario.getId()),
+                cuentaUsuario.getUsuario().getCedula(),
                 cuentaUsuario.getUsuario().getNombre(),
                 cuentaUsuario.getUsuario().getTelefono(),
                 cuentaUsuario.getUsuario().getDireccion(),
@@ -371,11 +371,10 @@ public class CuentaServicioImpl implements CuentaServicio {
         return "Se activo la cuenta correctamente";
     }
 
-    public Cuenta obtenerCuenta(String id) throws Exception {
-        Optional<Cuenta> cuentaOptional = cuentaRepo.findById(id);
-
+    public Cuenta obtenerCuenta(String email) throws Exception {
+        Optional<Cuenta> cuentaOptional = cuentaRepo.buscarCuentaPorCorreo(email);
         if (cuentaOptional.isEmpty()) {
-            throw new Exception("La cuenta con el id: " + id + " no existe");
+            throw new Exception("La cuenta con el correo: " + email + " no existe");
         }
 
         return cuentaOptional.get();
