@@ -92,9 +92,9 @@ public class AdministradorController {
     // Métodos para eliminar
 
     @DeleteMapping("/autos/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarAuto(@PathVariable String placa) {
+    public ResponseEntity<MensajeDTO<String>> eliminarAuto(@PathVariable String id) {
         try {
-            autosServicio.eliminarCotizacionAutos(placa);
+            autosServicio.eliminarCotizacionAutos(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Auto eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar auto: " + e.getMessage()));
@@ -102,9 +102,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/hogar/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarHogar(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarHogar(@PathVariable String id) {
         try {
-            hogarServicio.eliminarCotizacionHogar(cedula);
+            hogarServicio.eliminarCotizacionHogar(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Hogar eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar hogar: " + e.getMessage()));
@@ -112,9 +112,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/proteccion-credito/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarProteccionCredito(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarProteccionCredito(@PathVariable String id) {
         try {
-            proteccionCreditoServicio.eliminarCotizacionProteccionCredito(cedula);
+            proteccionCreditoServicio.eliminarCotizacionProteccionCredito(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Proteccion Credito eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar protección de crédito: " + e.getMessage()));
@@ -122,9 +122,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/pyme/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarPyme(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarPyme(@PathVariable String id) {
         try {
-            pymeServicio.eliminarCotizacionPyme(cedula);
+            pymeServicio.eliminarCotizacionPyme(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Pyme eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar pyme: " + e.getMessage()));
@@ -132,9 +132,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/responsabilidad-civil/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarResponsabilidadCivil(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarResponsabilidadCivil(@PathVariable String id) {
         try {
-            responsabilidadCivilServicio.eliminarCotizacionResponsabilidadCivil(cedula);
+            responsabilidadCivilServicio.eliminarCotizacionResponsabilidadCivil(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Responsabilidad Civil eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar responsabilidad civil: " + e.getMessage()));
@@ -142,9 +142,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/salud/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarSalud(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarSalud(@PathVariable String id) {
         try {
-            saludServicio.eliminarCotizacionSalud(cedula);
+            saludServicio.eliminarCotizacionSalud(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Salud eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar salud: " + e.getMessage()));
@@ -152,9 +152,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/vida/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarVida(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarVida(@PathVariable String id) {
         try {
-            vidaServicio.eliminarCotizacionVida(cedula);
+            vidaServicio.eliminarCotizacionVida(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Cotizacion Vida eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar vida: " + e.getMessage()));
@@ -162,9 +162,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/soat/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarSoat(@PathVariable String placa) {
+    public ResponseEntity<MensajeDTO<String>> eliminarSoat(@PathVariable String id) {
         try {
-            soatServicio.eliminarSoat(placa);
+            soatServicio.eliminarSoat(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Soat eliminado"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar Soat: " + e.getMessage()));
@@ -172,9 +172,9 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/peticion/eliminar/{id}")
-    public ResponseEntity<MensajeDTO<String>> eliminarPeticion(@PathVariable String cedula) {
+    public ResponseEntity<MensajeDTO<String>> eliminarPeticion(@PathVariable String id) {
         try {
-            peticionServicio.eliminarPeticion(cedula);
+            peticionServicio.eliminarPeticion(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Peticion eliminada"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new MensajeDTO<>(true, "Error al eliminar Peticion: " + e.getMessage()));

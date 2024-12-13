@@ -69,9 +69,9 @@ public class PymeServicioImpl implements PymeServicio {
     }
 
     @Override
-    public void eliminarCotizacionPyme(String cedula) throws Exception {
+    public void eliminarCotizacionPyme(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = pymeRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = pymeRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -79,7 +79,7 @@ public class PymeServicioImpl implements PymeServicio {
         // Eliminar la cotización de la base de datos
         pymeRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización Pyme con id " + cedula + " eliminada.");
+        System.out.println("Cotización Pyme con id " + id + " eliminada.");
     }
 
     @Override

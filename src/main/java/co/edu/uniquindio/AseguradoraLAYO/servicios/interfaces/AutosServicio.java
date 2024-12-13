@@ -8,7 +8,7 @@ import java.util.List;
 public interface AutosServicio {
     void crearCotizacionAutos(CrearCotizacionAutoDTO autos) throws Exception;
 
-    void eliminarCotizacionAutos(String placa) throws Exception;
+    void eliminarCotizacionAutos(String id) throws Exception;
 
     List<ObtenerAutosDTO> listarAutos() throws Exception;
 }

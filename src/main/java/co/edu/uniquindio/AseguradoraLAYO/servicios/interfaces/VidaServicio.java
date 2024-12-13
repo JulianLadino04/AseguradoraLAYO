@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface VidaServicio {
     void crearCotizacionVida(CrearCotizacionVidaDTO vida) throws Exception;
-    void eliminarCotizacionVida(String cedula) throws Exception;
+    void eliminarCotizacionVida(String id) throws Exception;
     List<ObtenerVidaDTO> listarVida() throws Exception;
 }

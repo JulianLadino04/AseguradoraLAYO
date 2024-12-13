@@ -65,9 +65,9 @@ public class ResponsabilidadCivilServicioImpl implements ResponsabilidadCivilSer
     }
 
     @Override
-    public void eliminarCotizacionResponsabilidadCivil(String cedula) throws Exception {
+    public void eliminarCotizacionResponsabilidadCivil(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = responsabilidadCivilRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = responsabilidadCivilRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -75,7 +75,7 @@ public class ResponsabilidadCivilServicioImpl implements ResponsabilidadCivilSer
         // Eliminar la cotización de la base de datos
         responsabilidadCivilRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización Responsabilidad Civil con id " + cedula + " eliminada.");
+        System.out.println("Cotización Responsabilidad Civil con id " + id + " eliminada.");
     }
 
     @Override

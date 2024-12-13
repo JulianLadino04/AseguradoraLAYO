@@ -63,9 +63,9 @@ public class SaludServicioImpl implements SaludServicio {
     }
 
     @Override
-    public void eliminarCotizacionSalud(String cedula) throws Exception {
+    public void eliminarCotizacionSalud(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = saludRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = saludRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -73,7 +73,7 @@ public class SaludServicioImpl implements SaludServicio {
         // Eliminar la cotización de la base de datos
         saludRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización Salud con id " + cedula + " eliminada.");
+        System.out.println("Cotización Salud con id " + id + " eliminada.");
     }
 
     @Override

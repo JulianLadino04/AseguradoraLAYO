@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface HogarServicio {
     void crearCotizacionHogar(CrearCotizacionHogarDTO hogar) throws Exception;
-    void eliminarCotizacionHogar(String cedula) throws Exception;
+    void eliminarCotizacionHogar(String id) throws Exception;
     List<ObtenerHogarDTO> listarHogares() throws Exception;
 }

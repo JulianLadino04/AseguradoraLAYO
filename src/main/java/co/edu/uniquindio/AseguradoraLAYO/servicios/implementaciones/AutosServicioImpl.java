@@ -61,9 +61,9 @@ public class AutosServicioImpl implements AutosServicio {
     }
 
     @Override
-    public void eliminarCotizacionAutos(String placa) throws Exception {
+    public void eliminarCotizacionAutos(String id) throws Exception {
         // Buscar la cotización por placa
-        var cotizacionOpt = autosRepo.buscarPorPlaca(placa);
+        var cotizacionOpt = autosRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con la placa proporcionada");
         }
@@ -71,7 +71,7 @@ public class AutosServicioImpl implements AutosServicio {
         // Eliminar de la base de datos
         autosRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización de auto con placa " + placa + " eliminada.");
+        System.out.println("Cotización de auto con placa " + id + " eliminada.");
     }
 
     @Override

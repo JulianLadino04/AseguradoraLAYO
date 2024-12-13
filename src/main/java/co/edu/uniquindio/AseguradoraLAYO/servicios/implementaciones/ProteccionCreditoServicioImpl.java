@@ -64,9 +64,9 @@ public class ProteccionCreditoServicioImpl implements ProteccionCreditoServicio 
     }
 
     @Override
-    public void eliminarCotizacionProteccionCredito(String cedula) throws Exception {
+    public void eliminarCotizacionProteccionCredito(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = proteccionCreditoRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = proteccionCreditoRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -74,7 +74,7 @@ public class ProteccionCreditoServicioImpl implements ProteccionCreditoServicio 
         // Eliminar la cotización de la base de datos
         proteccionCreditoRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización de protección de crédito con id " + cedula + " eliminada.");
+        System.out.println("Cotización de protección de crédito con id " + id + " eliminada.");
     }
 
     @Override

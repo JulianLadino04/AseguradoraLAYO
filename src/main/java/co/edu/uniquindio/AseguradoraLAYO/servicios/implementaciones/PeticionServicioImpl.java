@@ -58,9 +58,9 @@ public class PeticionServicioImpl implements PeticionServicio {
     }
 
     @Override
-    public void eliminarPeticion(String cedula) throws Exception {
+    public void eliminarPeticion(String id) throws Exception {
         // Buscar la petición por cédula
-        var peticionOpt = peticionRepo.buscarPorCedula(cedula);
+        var peticionOpt = peticionRepo.findById(id);
         if (peticionOpt.isEmpty()) {
             throw new Exception("No se encontró una petición con la cédula proporcionada");
         }
@@ -68,7 +68,7 @@ public class PeticionServicioImpl implements PeticionServicio {
         // Eliminar de la base de datos
         peticionRepo.delete(peticionOpt.get());
 
-        System.out.println("Petición con cédula " + cedula + " eliminada.");
+        System.out.println("Petición con cédula " + id + " eliminada.");
     }
 
     @Override
@@ -82,6 +82,7 @@ public class PeticionServicioImpl implements PeticionServicio {
         // Convertir la lista de Peticion a DTOs
         return peticiones.stream()
                 .map(peticion -> new ObtenerPeticionDTO(
+                        peticion.getId(),
                         peticion.getCedula(),
                         peticion.getNombre(),
                         peticion.getCorreo(),

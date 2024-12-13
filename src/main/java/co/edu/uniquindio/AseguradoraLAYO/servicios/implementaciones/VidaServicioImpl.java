@@ -64,9 +64,9 @@ public class VidaServicioImpl implements VidaServicio {
     }
 
     @Override
-    public void eliminarCotizacionVida(String cedula) throws Exception {
+    public void eliminarCotizacionVida(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = vidaRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = vidaRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -74,7 +74,7 @@ public class VidaServicioImpl implements VidaServicio {
         // Eliminar la cotización de la base de datos
         vidaRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización Vida con id " + cedula + " eliminada.");
+        System.out.println("Cotización Vida con id " + id + " eliminada.");
     }
 
     @Override

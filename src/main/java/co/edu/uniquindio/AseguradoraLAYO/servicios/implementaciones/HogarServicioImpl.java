@@ -66,9 +66,9 @@ public class HogarServicioImpl implements HogarServicio {
     }
 
     @Override
-    public void eliminarCotizacionHogar(String cedula) throws Exception {
+    public void eliminarCotizacionHogar(String id) throws Exception {
         // Buscar la cotización por id
-        var cotizacionOpt = hogarRepo.buscarPorCedula(cedula);
+        var cotizacionOpt = hogarRepo.findById(id);
         if (cotizacionOpt.isEmpty()) {
             throw new Exception("No se encontró una cotización con el id proporcionado.");
         }
@@ -76,7 +76,7 @@ public class HogarServicioImpl implements HogarServicio {
         // Eliminar la cotización de la base de datos
         hogarRepo.delete(cotizacionOpt.get());
 
-        System.out.println("Cotización de hogar con id " + cedula + " eliminada.");
+        System.out.println("Cotización de hogar con id " + id + " eliminada.");
     }
 
     @Override

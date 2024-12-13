@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ResponsabilidadCivilServicio {
     void crearCotizacionResponsabilidadCivil(CrearCotizacionResponsabilidadCivilDTO responsabilidadCivil) throws Exception;
-    void eliminarCotizacionResponsabilidadCivil(String cedula) throws Exception;
+    void eliminarCotizacionResponsabilidadCivil(String id) throws Exception;
     List<ObtenerResponsabilidadCivilDTO> listarResponsabilidadCivil() throws Exception;
 }

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PymeServicio {
     void crearCotizacionPyme(CrearCotizacionPymeDTO pyme) throws Exception;
-    void eliminarCotizacionPyme(String cedula) throws Exception;
+    void eliminarCotizacionPyme(String id) throws Exception;
     List<ObtenerPymeDTO> listarPymes() throws Exception;
 }

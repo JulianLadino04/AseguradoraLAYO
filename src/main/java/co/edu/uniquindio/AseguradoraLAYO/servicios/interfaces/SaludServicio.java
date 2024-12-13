@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SaludServicio {
     void crearCotizacionSalud(CrearCotizacionSaludDTO salud) throws Exception;
-    void eliminarCotizacionSalud(String cedula) throws Exception;
+    void eliminarCotizacionSalud(String id) throws Exception;
     List<ObtenerSaludDTO> listarSalud() throws Exception;
 
 }
